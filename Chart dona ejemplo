@@ -1,0 +1,50 @@
+new Chart(document.getElementById("GraficoPie"), {
+                type: "pie",
+                data: {
+                    labels: ["Región Metropolitana", "Resto del país"],
+                    datasets: [
+                        {
+                            data: [1776, 778],
+                            backgroundColor: [
+                                "rgba(232, 87, 26, 0.85)",
+                                "rgba(64, 64, 64, 0.75)",
+                            ],
+                            borderColor: ["#fefefe", "#fefefe"],
+                            borderWidth: 2,
+                        },
+                    ],
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: "bottom",
+                            labels: {
+                                font: { family: "'Georama', sans-serif", size: 12 },
+                                color: "#404040",
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyleWidth: 12,
+                            },
+                        },
+                        tooltip: {
+                            backgroundColor: "#fff",
+                            borderColor: "#ddd",
+                            borderWidth: 1,
+                            titleColor: "#111",
+                            bodyColor: "#555",
+                            titleFont: { family: "'Georama', sans-serif", size: 12, weight: "600" },
+                            bodyFont: { family: "'Georama', sans-serif", size: 11 },
+                            padding: 10,
+                            callbacks: {
+                                label: function (context) {
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const value = context.parsed;
+                                    const pct = ((value / total) * 100).toFixed(1);
+                                    return context.label + ": " + value.toLocaleString("es-CL") + " vacantes (" + pct + "%)";
+                                },
+                            },
+                        },
+                    },
+                },
+            });
